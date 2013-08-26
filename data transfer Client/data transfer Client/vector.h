@@ -1,0 +1,195 @@
+/*************************************************************/
+/*                          VECTOR.H                         */
+/*                                                           */
+/* Purpose: Definitions for CVector class, both 2 and 3      */
+/*          element types and related functions.             */
+/*      Evan Pipho (May 27, 2002)                            */
+/*                                                           */
+/*************************************************************/
+#ifndef VECTOR_H
+#define VECTOR_H
+
+class CQuaternion;
+class CMatrix3X3;
+class CMatrix4X4;
+
+//-------------------------------------------------------------
+//                        CVector2                            -
+// author: Evan Pipho (terminate@gdnmail.net)                 -
+// date  : May 27, 2002                                       -
+//-------------------------------------------------------------
+class CVector2
+{
+public:
+
+	//calculate magnitude of the vector
+	float Magnitude() const;
+	//normalize the vector so it has a magnitude of 1
+	void Normalize();
+	//negate all the components of the vector
+	void Negate();
+	
+	//calculate the dot product
+	float Dot(const CVector2& vec) const;
+
+	//Operators
+
+	//add vector
+	const CVector2 operator+ (const CVector2& vec) const;
+	//subtract vector
+	const CVector2 operator- (const CVector2& vec) const;
+	//add vector to stored vector
+	const void operator += (const CVector2& vec);
+	//subtract vector from stored vector
+	const void operator -= (const CVector2& vec);
+	//negate the vector
+	const CVector2 operator-();
+	
+	//Scalar multiplication
+	const CVector2 operator *  (const float fScalar) const;
+	//Scalar division
+	const CVector2 operator /  (const float fScalar) const;
+	//Multiply the stored vector by a scalar
+	const void operator *= (const float fScalar);
+	//Divide the stored vector by a scalar
+	const void operator /= (const float fScalar);
+
+	//Set the stored vector equal to another
+	const void operator =  (const CVector2& vec);
+	//See if the stored vector and another are equal
+	const bool	  operator == (const CVector2& vec)  const;
+	//See if the stored vector and another are not equal
+	const bool	  operator != (const CVector2& vec)  const;
+
+	//constructors
+	CVector2();
+	CVector2(const CVector2& vecCopy);
+	CVector2(float * fpVec);
+	CVector2(float fX, float fY);
+
+	//accessors
+	float * Get();
+	void Set(float fX, float fY);
+	void Set(float * fpVec);
+
+	float x, y;
+
+};
+
+//-------------------------------------------------------------
+//                        CVector3                            -
+// author: Evan Pipho (terminate@gdnmail.net)                 -
+// date  : May 27, 2002                                       -
+//-------------------------------------------------------------
+class CVector3
+{
+	friend CQuaternion;
+	friend class CCube;
+	friend class CCamera;
+
+public:
+
+	//calculate magnitude of the vector
+	float Magnitude() const;
+	//normalize the vector so it has a magnitude of 1
+	void Normalize();
+	//negate all the components of the vector
+	void Negate();
+	
+	//calculate the dot product
+	float Dot(const CVector3& vec) const;
+	//calculate the cross product
+	CVector3 Cross(const CVector3& vec) const;
+
+	//transform the vector by a 3x3 matrix
+	void Transform3(const CMatrix3X3& mat);
+	//transform the vector by a 4x4 matrix, using only the firs 3x3
+	void Transform3(const CMatrix4X4& mat);
+	//transform the vector by a 4x4 matrix
+	void Transform4(const CMatrix4X4& mat);
+	//Transform the vector by a Quaternion
+	void TransformQ(const CQuaternion& quat);
+
+	//Operators
+
+	//add vector
+	const CVector3 operator+ (const CVector3& vec) const;
+	//subtract vector
+	const CVector3 operator- (const CVector3& vec) const;
+	//add vector to stored vector
+	const void operator += (const CVector3& vec);
+	//subtract vector from stored vector
+	const void operator -= (const CVector3& vec);
+	//negate the vector
+	const CVector3 operator-();
+	
+	//Scalar multiplication
+	const CVector3 operator *  (const float fScalar) const;
+	//Scalar division
+	const CVector3 operator /  (const float fScalar) const;
+	//Multiply the stored vector by a scalar
+	const void operator *= (const float fScalar);
+	//Divide the stored vector by a scalar
+	const void operator /= (const float fScalar);
+
+	//Set the stored vector equal to another
+	const void operator =  (const CVector3& vec);
+	//See if the stored vector and another are equal
+	const bool	  operator == (const CVector3& vec)  const;
+	//See if the stored vector and another are not equal
+	const bool	  operator != (const CVector3& vec)  const;
+
+	//Multiply the vector by a quaternion (rotate it)
+	const CVector3 operator * (const CQuaternion& quat) const;
+
+	//constructors
+	CVector3();
+	CVector3(const CVector3& vecCopy);
+	CVector3(float * fpVec);
+	CVector3(float fX, float fY, float fZ);
+
+	//accessors
+	float * Get();
+	void Set(float fX, float fY, float fZ);
+	void Set(float * fpVec);
+
+	float x, y, z;
+	
+};
+
+//-------------------------------------------------------------
+//                      FUNCTIONS                             -
+//-------------------------------------------------------------
+//-------------------------------------------------------------
+//- DotProduct
+//- Returns the dot product of two vectors
+//-------------------------------------------------------------
+inline float DotProduct(CVector2 vec0, CVector2 vec1)
+{
+	return ( (vec0.x * vec1.x) + (vec0.y * vec1.y));
+}
+
+inline float DotProduct(CVector3 vec0, CVector3 vec1)
+{
+	return ( (vec0.x * vec1.x) + (vec0.y * vec1.y) + (vec0.z * vec1.z));
+}
+
+//-------------------------------------------------------------
+//- CrossProduct
+//- Returns the dot product of two vectors
+//-------------------------------------------------------------
+inline CVector3 CrossProduct(CVector3 vec0, CVector3 vec1)
+{
+		return ( CVector3( (vec0.y * vec1.z - vec0.z * vec1.y), (vec0.z * vec1.x - vec0.x * vec1.z), (vec0.x * vec1.y - vec0.y * vec1.x)));
+}
+
+inline CVector3 Normalize(CVector3 vec)
+{
+	return vec / vec.Magnitude();
+}
+
+
+//inline functions
+#include "vector.inl"
+
+#endif //VECTOR_H

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "data transfer Client", "data transfer Client\data transfer Client.vcxproj", "{FE8A2B05-452B-45A3-AC8C-1CC81B8482BE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "data transfer Server", "data transfer Server\data transfer Server.vcxproj", "{A2C64F9B-4CDB-449E-81AD-591FDF7C1F7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE8A2B05-452B-45A3-AC8C-1CC81B8482BE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE8A2B05-452B-45A3-AC8C-1CC81B8482BE}.Debug|Win32.Build.0 = Debug|Win32
+		{FE8A2B05-452B-45A3-AC8C-1CC81B8482BE}.Release|Win32.ActiveCfg = Release|Win32
+		{FE8A2B05-452B-45A3-AC8C-1CC81B8482BE}.Release|Win32.Build.0 = Release|Win32
+		{A2C64F9B-4CDB-449E-81AD-591FDF7C1F7B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A2C64F9B-4CDB-449E-81AD-591FDF7C1F7B}.Debug|Win32.Build.0 = Debug|Win32
+		{A2C64F9B-4CDB-449E-81AD-591FDF7C1F7B}.Release|Win32.ActiveCfg = Release|Win32
+		{A2C64F9B-4CDB-449E-81AD-591FDF7C1F7B}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
